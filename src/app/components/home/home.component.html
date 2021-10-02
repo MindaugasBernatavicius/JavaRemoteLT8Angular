@@ -1,0 +1,24 @@
+<h1>Hello world!</h1>
+<p id="title">{{ title }}</p>
+<p>{{ someVariable }}</p>
+<span class="xyz">App component text</span>
+<p> {{ someVariable + ' :: ' + getSomeString() }}</p>
+<p> {{ 1 + 1 }}</p>
+
+<hr>
+<p *ngIf="showMessage">This is my message!</p>
+<button class="btn btn-warning" (click)="handleClick($event)">{{ buttonText }}</button>
+
+<hr>
+<input [(ngModel)]="inputText">
+<!--<p>{{ inputText }}</p>-->
+<input [(ngModel)]="inputText">
+
+<!--<img [src]="productUrl" alt="blueberries"/>-->
+
+<hr>
+<table>
+  <tr *ngFor="let arrMember of arr">
+    <td>{{ arrMember }}</td>
+  </tr>
+</table>

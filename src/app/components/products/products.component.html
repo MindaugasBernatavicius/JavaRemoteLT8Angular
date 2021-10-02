@@ -1,0 +1,32 @@
+<label>Filter:</label>&nbsp;
+<input type="text" (input)="filterProducts($event)">
+
+<table *ngIf="products.length > 0; else noProducts" class="table" >
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Count</th>
+    <th>Price</th>
+    <th>Original JSON</th>
+    <th>Score</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of filteredProducts">
+    <td>
+      <a [routerLink]="['/products', product.id]">
+        {{ product.title | convertToSpace: '&' | convertToSpace: '%' | titlecase  }}
+      </a>
+    </td>
+    <td>{{ product.count }}</td>
+    <td>{{ product.price | currency : 'EUR':'symbol':'0.2-2' }}</td>
+    <td>{{ product | json }}</td>
+    <td><app-star [rating]="product.rating" (ratingClicked)="onRatingClicked($event)"></app-star></td>
+  </tr>
+  </tbody>
+</table>
+{{ text }}
+<!--<p *ngIf="products.length <= 0" class="alert alert-warning">There are no products currently!</p>-->
+<ng-template #noProducts>
+  <p class="alert alert-warning">No data!</p>
+</ng-template>

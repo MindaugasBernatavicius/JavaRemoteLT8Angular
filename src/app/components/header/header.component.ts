@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <img class="navbar-brand" src="https://getbootstrap.com/docs/5.0/assets/brand/{{bootstrapLogo}}" width="30" height="35" alt=""/>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" [routerLink]="['/home']">
           <span class="xyz">Navbar text</span>
         </a>
 
@@ -16,28 +16,30 @@ import { Component, OnInit } from '@angular/core';
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="link-gy nav-link" [routerLinkActive]="['active']" [routerLink]="['/home']">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="link-gy nav-link" [routerLinkActive]="['active']" [routerLink]="['/products']">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+              <a class="link-gy nav-link" [routerLinkActive]="['active']" [routerLink]="['/about']">About</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
   `,
-  styles: ['.xyz { color: greenyellow }']
+  styles: ['.xyz { color: greenyellow }', ' .link-gy.nav-link.active { color: greenyellow; }']
 })
 export class HeaderComponent implements OnInit {
 
   bootstrapLogo = 'bootstrap-logo.svg';
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    console.log("Constructor!");
   }
 
+  ngOnInit(): void {
+    console.log("OnInit!");
+  }
 }
