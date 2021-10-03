@@ -1,12 +1,32 @@
 <div class="card">
 <div class="card-body">
-  <ul class="list-group">
-    <li class="list-group-item">Product id: <b>{{ product?.id }}</b></li>
-    <li class="list-group-item">Product title: <b>{{ product?.title }}</b></li>
-    <li class="list-group-item">Product count: <b>{{ product?.count }}</b></li>
-    <li class="list-group-item">Product price: <b>{{ product?.price }}</b></li>
-    <li class="list-group-item">Product rating: <b>{{ product?.rating }}</b></li>
-  </ul>
+  <!--<ul class="list-group">-->
+  <!--  <li class="list-group-item">Product id: <b>{{ product?.id }}</b></li>-->
+  <!--  <li class="list-group-item">Product title: <b>{{ product?.title }}</b></li>-->
+  <!--  <li class="list-group-item">Product count: <b>{{ product?.count }}</b></li>-->
+  <!--  <li class="list-group-item">Product price: <b>{{ product?.price }}</b></li>-->
+  <!--  <li class="list-group-item">Product rating: <b>{{ product?.rating }}</b></li>-->
+  <!--</ul>-->
+  <form #prodForm="ngForm" (ngSubmit)="onSubmitProduct(product)">
+    <div class="form-group">
+      <label for="pt">Product title</label>
+      <input name="title" type="text" class="form-control" id="pt"
+             [ngModel]="product?.title" (ngModelChange)="product!.title=$event"
+             #title="ngModel" required>
+      <div [hidden]="title.valid || !title.touched"
+           class="alert alert-danger">Please provide a valid product title!</div>
+    </div>
+    <div class="form-group">
+      <label for="pr">Product rating</label>
+      <input name="rating" type="number" max="5" min="0" class="form-control" id="pr"
+             [ngModel]="product?.rating" (ngModelChange)="product!.rating=$event"
+             #rating="ngModel" required>
+      <div [hidden]="rating.valid || !rating.touched"
+           class="alert alert-danger">Please provide a valid product rating!</div>
+    </div>
+    <br>
+    <button class="btn btn-primary">Submit</button>
+  </form>
 </div>
 <div class="card-footer">
   <button class="btn btn-outline-secondary" (click)="onBack()">
@@ -16,13 +36,21 @@
 </div>
 
 <br>
-<form #f="ngForm">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
   <div class="form-group">
     <label for="in1">Input</label>
-    <input name="name" type="text" class="form-control" id="in1" [ngModel]="product?.title">
+    <input name="title" type="text" class="form-control" id="in1" [ngModel]="product?.title" #title="ngModel" required>
+    <!--<div *ngIf="!title.valid && title.touched" class="alert alert-danger">Please provide a valid product title!</div>-->
+    <div [hidden]="title.valid || !title.touched" class="alert alert-danger">Please provide a valid product title!</div>
   </div>
   <button (click)="onClick()" class="btn btn-primary">Submit</button>
 </form>
 <br>
-{{ f.value | json }}
+f.value {{ f.value | json }}<br>
+f.valid {{ f.valid | json }}<br>
+f.submitted {{ f.submitted | json }}<br>
+f.touched  {{ f.touched | json }}<br>
+f.dirty {{ f.dirty | json }}<br>
+
+
 

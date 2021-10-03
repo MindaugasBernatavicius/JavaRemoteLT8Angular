@@ -20,7 +20,10 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     const id = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.product = this.ps.getProductById(id);
+    this.ps.getProductById(id).subscribe(
+    res => this.product = res,
+    err => console.log(err)
+    )
   }
 
   onBack() {
@@ -28,6 +31,18 @@ export class ProductComponent implements OnInit {
   }
 
   onClick() {
-    console.log(this.myForm.value)
+    // console.log(this.myForm.value)
+  }
+
+  onSubmitProduct(_product: IProduct | undefined) {
+    console.log(_product)
+    this.ps.updateProduct(_product!).subscribe(
+      res => this.product = _product,
+      err => console.log(err)
+    )
+  }
+
+  onSubmit(f: NgForm) {
+    console.log(f.value)
   }
 }

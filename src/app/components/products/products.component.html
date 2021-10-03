@@ -30,3 +30,16 @@
 <ng-template #noProducts>
   <p class="alert alert-warning">No data!</p>
 </ng-template>
+
+
+<form #productCreationForm="ngForm">
+  <div class="form-group">
+    <label for="title">Product Title</label>
+    <input name="title" type="text" class="form-control" id="title" ngModel>
+    <label for="count">Product Count</label>
+    <input name="count" type="number" class="form-control" id="count" ngModel>
+    <label for="price">Product Price</label>
+    <input name="price" type="number" class="form-control" id="price" ngModel>
+  </div>
+  <button (click)="formHandlingMethod($event)" type="submit" class="btn btn-primary">Submit</button>
+</form>

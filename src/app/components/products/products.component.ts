@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from "../../services/product.service";
 import {IProduct} from "../../models/IProduct";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-products',
@@ -11,11 +12,18 @@ export class ProductsComponent implements OnInit {
   text: string = '';
   products: IProduct[] = [];
   filteredProducts: IProduct[] = [];
+  @ViewChild('productCreationForm') private productCreationForm!: NgForm;
+
   constructor(private ps: ProductService) {}
 
   ngOnInit(): void {
-    this.products = this.ps.getProducts();
-    this.filteredProducts = this.products;
+    this.ps.getProducts().subscribe(
+      res => {
+        this.products = res;
+        this.filteredProducts = this.products;
+      },
+      err => console.log(err)
+    );
   }
 
   filterProducts($event: Event) {
@@ -25,5 +33,23 @@ export class ProductsComponent implements OnInit {
 
   onRatingClicked($event: string) {
     this.text = $event;
+  }
+
+  formHandlingMethod($event: MouseEvent): void {
+    if (this.productCreationForm.valid) {
+      this.ps.createProduct(this.productCreationForm.value).subscribe(
+        res => {
+          this.ps.getProducts().subscribe(
+            res2 => {
+              this.products = res2;
+              this.filteredProducts = res2; // TODO:: filtering will not work, add filtervalue in the class and set it
+            },
+            err => console.log(err)
+          );
+        },
+        err => console.log(err),
+      );
+    }
+    this.productCreationForm.resetForm();
   }
 }

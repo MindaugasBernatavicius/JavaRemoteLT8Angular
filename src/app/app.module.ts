@@ -11,6 +11,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { HomeComponent } from './components/home/home.component';
 import { StarComponent } from './components/star/star.component';
 import { ProductComponent } from './components/product/product.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ProductComponent } from './components/product/product.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: 'about', component: AboutComponent },
       { path: 'home', component: HomeComponent },

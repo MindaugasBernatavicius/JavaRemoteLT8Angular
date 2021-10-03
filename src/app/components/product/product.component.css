@@ -1,0 +1,24 @@
+/*
+2 problems with this:
+- if there is no data when the page is opened the form is immediately invalid
+- both the form and the input field are red (only input field should be red)
+*/
+/*.ng-invalid {*/
+/*  border: 1px solid red;*/
+/*}*/
+
+/* Select all elements with both classes ng-touched and ng-invalid.*/
+/*.ng-invalid.ng-touched {*/
+/*  border: 1px solid red;*/
+/*}*/
+
+/* Select all elements with the class name ng-touched
+that are descendants of the element ng-invalid. (this works fine) */
+/*.ng-invalid .ng-touched {*/
+/*  border: 1px solid red;*/
+/*}*/
+
+/* Another way to solve this */
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid red;
+}
